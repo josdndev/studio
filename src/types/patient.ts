@@ -1,37 +1,51 @@
 /**
  * Represents a patient in the hospital system.
  */
-export interface Patient {
-  /**
-   * Unique identifier for the patient (e.g., Firestore document ID).
-   */
-  id: string;
-  /**
-   * Patient's full name.
-   */
-  name: string;
-  /**
-   * Patient's year of birth.
-   */
-  dobYear: number;
-  /**
-   * Type of identification document (e.g., DNI, Passport).
-   */
-  idType: string;
-  /**
-   * Identification document number.
-   */
-  idNumber: string;
-  /**
-   * Relevant medical history notes. Optional.
-   */
+export type Patient = {
+  patientId?: string;
+  fullName: string;
+  birthYear: number;
+  documentType: string;
+  documentNumber: string;
   medicalHistory?: string;
-  /**
-   * Patient's contact information (e.g., email or phone). Optional.
-   */
-  contact?: string;
-   /**
-    * Current status of the patient within the hospital flow.
-    */
-   status: string; // e.g., "En espera", "Pre-cirugía", etc.
+  contact?: {
+    phone?: string;
+    email?: string;
+    address?: string;
+  };
+  status: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export type MedicalCenter = {
+  centerId?: string;
+  name: string;
+  address: string;
+  contact?: {
+    phone?: string;
+    email?: string;
+  };
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export type Vital = {
+  vitalId?: string;
+  patientId: string;
+  timestamp: Date;
+  type:
+    | "bpm"
+    | "oxygenSaturation"
+    | "temperature"
+    | "bloodPressure"
+    | "glucose";
+  value: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+export interface visit {
+  visitId?:string,
+  patientId: string
+  centerId:string
 }
